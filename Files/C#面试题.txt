@@ -1,0 +1,58 @@
+1.Action委托和Function委托的区别
+Func和Action委托的唯一区别在于Func要有返回值， Action没有返回值。
+2.IQueryable 和 IEnumerable 的区别
+IEnumerable存在于System.Collections命名空间中。
+IQueryable存在于系统中。Linq命名空间。
+IEnumerable和IQueryable都是正向收集。
+IEnumerable不支持延迟加载
+IQueryable支持延迟加载
+IEnumerable从数据库中查询数据，然后在服务器端执行选择查询，在客户端将数据加载到内存中，然后过滤数据。
+从数据库查询数据，IQueryable使用所有过滤器在服务器端执行选择查询。
+IEnumerable扩展方法采用功能对象。
+IQueryable Extension方法采用表达式对象表示表达式树。
+3.描述一下.net core依赖注入后的服务生命周期?                                                 
+在ASP.NET Core中，我们不需要关心如何释放这些服务, 因为系统会帮我们释放掉。有三种服务的生命周期。
+单实例服务， 通过add singleton方法来添加。在注册时即创建服务, 在随后的请求中都使用这一个服务。
+短暂服务, 通过add transient方法来添加。是一种轻量级的服务，用于无状态服务的操作。
+作用域服务，一个新的请求会创建一个服务实例。使用add scoped方法来添加。
+4.说说你对RESTful的理解。
+restful其实就是一套编写api接口的设计风格和开发方式，规定如何编写以及如何设置返回值、状态码等信息。
+RESTFUL特点包括：
+(1)、每一个URI代表1种资源；
+(2)、客户端使用GET、POST、PUT、DELETE4个表示操作方式的动词对服务端资源进行操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源；
+(3)、通过操作资源的表现形式来操作资源； 
+(4)、客户端与服务端之间的交互在请求之间是无状态的，从客户端到服务端的每个请求都必须包含理解请求所必需的信息。
+5.说说EFCore查询的性能调优小技巧。                   
+(1).使用DbContext池
+(2).优先使用异步方法
+(3).批处理语句
+(4).关闭状态追踪,AsNoTracking()
+(5).关闭状态同步,context.ChangeTracker.AutoDetectChangesEnabled = false
+6.说说你对EF SaveChanges的理解
+SaveChanges是以Context为维度的一次提交，对于数据库操作的一切动作，只要是在同一个Context实例，所有的操作，在调用SaveChanges方法后，统一体现到数据库中去；
+7.说说什么是EF中导航属性和引用属性。                     
+EF Core导航属性分为三种：
+集合导航属性：主表中对子表相关数据的引用
+引用导航属性：子表中对主表数据的引用
+反转导航属性：一个导航属性对应的另一端的导航属性
+8.ASP.NET Core Filter的注册方式有哪些？
+方法注册：只对方法生效
+控制器注册：对控制器中的所有方法生效
+全局注册：对整个项目生效；
+9.ASP.NET Core Filter如何支持依赖注入?    
+可以通过全局注册，支持依赖注入
+通过TypeFilter(typeof(Filter)) 标记在方法，标记在控制器
+通过ServiceType(typeof(Filter))标记在方法，标记在控制器，必须要注册Filter这类；
+TypeFilter和ServiceType的本质是实现了一个IFilterFactory接口；
+10.什么是CLR？CLR的作用是什么？
+公共语言运行库，负责资源管理（包括内存分配、程序及加载、异常处理、线程同步、垃圾回收等），并保证应用和底层操作系统的分离。
+11。线程同步的有几种方法？分别是什么？
+（1）方法一：阻塞（调用Sleep()或Join()）
+（2）方法二：加互斥锁lock
+（3）方法三：信号和句柄（AutoResetEvent/ManualResetEvent，调用Set()和WaitOne()）
+12.什么是反射，说说你对反射的理解
+反射提供描述程序集、模块和类型的对象（Type 类型）。 可以使用反射动态地创建类型的实例，将类型绑定到现有对象，或从现有对象中获取类型，然后调用其方法或访问器字段和属性。 如果代码中使用了特性，可以利用反射来访问它们。
+
+
+
+
